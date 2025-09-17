@@ -1,0 +1,16 @@
+{
+  "AppHeader": {
+    "title": "随心所欲，自在阅读",
+    "subtitle": "万卷书册，尽在一掌之间。",
+    "description": "NovelGlide 是一款 EPUB 阅读器。界面简洁，体验沉浸，为你打造专属的阅读空间。"
+  },
+  "FeatureSection": {
+    "title": "核心功能",
+    "customFeatTitle": "个性化阅读设置",
+    "customFeatDescription": "自定义字体大小、行高、深色模式、页码显示等，打造专属于你的舒适阅读环境。",
+    "cloudFeatTitle": "云端同步与备份",
+    "cloudFeatDescription": "可将书籍、书签和收藏备份至你的个人云盘，也可从云端恢复数据，确保阅读进度永不丢失。",
+    "exploreFeatTitle": "支持 OPDS",
+    "exploreFeatDescription": "NovelGlide 支持 Open Publication Distribution System (OPDS) 目录。你也可以直接从 OPDS 服务器下载书籍，丰富你的书库。"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "AppHeader": {
+    "title": "いつでも、どこでも、自由に読書",
+    "subtitle": "無数の本を、手のひらの中に。",
+    "description": "NovelGlideは、シンプルで没入感のあるEPUBリーダーです。あなただけの読書体験をお届けします。"
+  },
+  "FeatureSection": {
+    "title": "主な機能",
+    "customFeatTitle": "読書環境のカスタマイズ",
+    "customFeatDescription": "文字サイズ、行間、ダークモードの切り替え、ページ表示方法などを自由に設定。あなただけの最適な読書環境を作り出せます。",
+    "cloudFeatTitle": "クラウドバックアップ",
+    "cloudFeatDescription": "書籍やブックマーク、コレクションを個人のクラウドストレージにバックアップできます。また、クラウドからデータを復元することも可能です。",
+    "exploreFeatTitle": "OPDSに対応",
+    "exploreFeatDescription": "NovelGlideは、Open Publication Distribution System (OPDS) カタログに対応しています。OPDSサーバーから直接本をダウンロードし、本棚に追加できます。"
+  }
+}

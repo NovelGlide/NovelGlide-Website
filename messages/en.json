@@ -1,0 +1,16 @@
+{
+  "AppHeader": {
+    "title": "Read Books Anywhere",
+    "subtitle": "Your Entire Library in One App.",
+    "description": "NovelGlide is a EPUB reader, offering a clean and immersive reading experience."
+  },
+  "FeatureSection": {
+    "title": "Features",
+    "customFeatTitle": "Customizable Reading Environment",
+    "customFeatDescription": "You can adjust font size and line-height, turn on / off the dark mode, and the pagination. Create your own reading environment.",
+    "cloudFeatTitle": "Cloud Backup",
+    "cloudFeatDescription": "You can back up your books, bookmarks, and collections to your personal cloud drive. Also, you can easily restore your backups from your cloud drive.",
+    "exploreFeatTitle": "OPDS Support",
+    "exploreFeatDescription": "NovelGlide support reading the catalog in Open Publication Distribution System (OPDS) format. You can download books from an OPDS server to your bookshelf."
+  }
+}

@@ -2,19 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGooglePlay } from "react-icons/fa6";
 import { FaApple } from "react-icons/fa6";
+import {useTranslations} from 'next-intl';
 
 export default function AppHeader() {
+  const t = useTranslations('AppHeader');
   return (
     <header className="p-8 w-full flex items-center">
       <div className="flex-2 pr-8">
         <h2 className="font-bold text-2xl md:text-4xl">
-          Read Books Anywhere
+          {t('title')}
         </h2>
         <h3 className="mt-4 font-bold text-xl md:text-2xl">
-          Your Entire Library in One App.
+          {t('subtitle')}
         </h3>
         <p className="mt-8">
-          NovelGlide is a EPUB reader, offering a clean and immersive reading experience.
+          {t('description')}
         </p>
         <p className="mt-8 flex items-center justify-evenly flex-wrap">
           <Link
