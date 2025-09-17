@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
+import React from "react";
 
 const NavLink = ({
                    href,
@@ -10,7 +11,13 @@ const NavLink = ({
                    className,
                    exact = false,
                    ...props
-                 }) => {
+                 }: Readonly<{
+  href: string,
+  children?: React.ReactNode;
+  activeClassName?: string;
+  className?: string,
+  exact?: boolean;
+}>) => {
   const pathname = usePathname();
 
   const isActive = exact ? pathname === href : pathname.startsWith(href);
