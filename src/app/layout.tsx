@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth bg-stone-200 text-stone-800">
+    <html lang="en" className="scroll-smooth bg-stone-100 text-stone-800">
       <body
         className={`
           ${geistSans.variable}
