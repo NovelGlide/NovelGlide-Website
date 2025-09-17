@@ -1,5 +1,6 @@
 import {getRequestConfig} from 'next-intl/server';
 import {headers} from "next/headers";
+import {defaultLocale, supportedLocales} from "@/i18n/support_locales";
 
 export default getRequestConfig(async () => {
   // Get locale from various sources
@@ -14,20 +15,19 @@ export default getRequestConfig(async () => {
 async function detectLocale(): Promise<string> {
   const headersList = await headers();
 
-  // Strategy 1: Check Accept-Language header
-  const acceptLanguage = headersList.get('Accept-Language');
+  // Strategy 1: Check cookie
+  const cookieStore = headersList.get('cookie');
+  const localeCookie = cookieStore
+    ?.split(';')
+    .find(c => c.trim().startsWith('locale='))
+    ?.split('=')[1];
 
-  // Strategy 2: Check custom header (if you set one)
-  const customLocale = headersList.get('X-Locale');
-
-  // Define your supported locales
-  const supportedLocales = ['en', 'zh-tw', 'zh-cn', 'ja'];
-  const defaultLocale = supportedLocales[0];
-
-  // Priority order: custom header > cookie > accept-language > default
-  if (customLocale && supportedLocales.includes(customLocale)) {
-    return customLocale;
+  if (localeCookie && supportedLocales.includes(localeCookie)) {
+    return localeCookie;
   }
+
+  // Strategy 2: Check Accept-Language header
+  const acceptLanguage = headersList.get('Accept-Language');
 
   if (acceptLanguage) {
     // Parse Accept-Language header

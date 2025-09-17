@@ -1,11 +1,15 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
-import { FaGooglePlay } from "react-icons/fa6";
-import { FaApple } from "react-icons/fa6";
-import {useTranslations} from 'next-intl';
+import {FaGooglePlay} from "react-icons/fa6";
+import {FaApple} from "react-icons/fa6";
+import {useTranslations, useLocale} from 'next-intl';
 
 export default function AppHeader() {
   const t = useTranslations('AppHeader');
+  const locale = useLocale();
+
   return (
     <header className="p-8 w-full flex items-center">
       <div className="flex-2 pr-8">
@@ -70,7 +74,7 @@ export default function AppHeader() {
       <div className="flex-1">
         <Image
           className="w-full h-full border-4 shadow-xl rounded-4xl object-contain"
-          src="/images/screenshots_en-US.png"
+          src={`/images/screenshot_${locale}.png`}
           alt="NovelGlide Screenshot"
           width={0}
           height={0}

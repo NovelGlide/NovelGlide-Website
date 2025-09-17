@@ -12,5 +12,12 @@
     "cloudFeatDescription": "你可以備份書籍、書籤、收藏至個人的雲端硬碟。也可以從個人的雲端空間中回復備份。",
     "exploreFeatTitle": "支援 OPDS",
     "exploreFeatDescription": "NovelGlide 支援讀取 Open Publication Distribution System (OPDS) 目錄。你也可以從 OPDS server 上下載書籍至書櫃中。"
+  },
+  "Locales": {
+    "title": "語言",
+    "en": "英文",
+    "ja": "日文",
+    "zh-cn": "簡體中文",
+    "zh-tw": "繁體中文"
   }
 }

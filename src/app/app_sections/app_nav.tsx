@@ -1,9 +1,17 @@
 import Image from "next/image";
+import NavLink from "@/app/app_sections/components/nav-link";
+import {Globe, Languages} from "lucide-react";
 
 export default function AppNav() {
   return (
     <nav className="p-8 flex justify-between items-center">
-      <div className="flex items-center space-x-4">
+      <div
+        className="
+          flex
+          items-center
+          space-x-4
+        "
+      >
         <Image
           className="rounded-xl"
           src="/images/app_icon.png"
@@ -12,9 +20,20 @@ export default function AppNav() {
           height={48}
         />
         <h1 className="text-xl font-bold">
-          NovelGlide
+          <NavLink href="/" activeClassName="" exact>
+            NovelGlide
+          </NavLink>
         </h1>
       </div>
+      <ul
+        className="flex gap-4"
+      >
+        <li>
+          <NavLink href="/locale" exact>
+            <Languages/>
+          </NavLink>
+        </li>
+      </ul>
     </nav>
   );
 }

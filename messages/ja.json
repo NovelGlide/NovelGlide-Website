@@ -12,5 +12,12 @@
     "cloudFeatDescription": "書籍やブックマーク、コレクションを個人のクラウドストレージにバックアップできます。また、クラウドからデータを復元することも可能です。",
     "exploreFeatTitle": "OPDSに対応",
     "exploreFeatDescription": "NovelGlideは、Open Publication Distribution System (OPDS) カタログに対応しています。OPDSサーバーから直接本をダウンロードし、本棚に追加できます。"
+  },
+  "Locales": {
+    "title": "言語",
+    "en": "英語",
+    "ja": "日本語",
+    "zh-cn": "中国語（簡体字）",
+    "zh-tw": "中国語（繁体字）"
   }
 }
