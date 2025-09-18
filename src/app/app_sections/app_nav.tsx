@@ -1,8 +1,11 @@
 import Image from "next/image";
 import NavLink from "@/app/app_sections/components/nav-link";
 import {Globe, Languages} from "lucide-react";
+import {useTranslations} from 'next-intl';
 
 export default function AppNav() {
+  const tLocale = useTranslations('AppHeader');
+
   return (
     <nav className="p-8 flex justify-between items-center">
       <div
@@ -29,7 +32,7 @@ export default function AppNav() {
         className="flex gap-4"
       >
         <li>
-          <NavLink href="/locale" exact>
+          <NavLink href="/locale" exact aria-label={tLocale('languages')}>
             <Languages/>
           </NavLink>
         </li>
