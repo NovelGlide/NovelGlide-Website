@@ -11,8 +11,8 @@ export default function AppHeader() {
   const locale = useLocale();
 
   return (
-    <header className="p-8 w-full flex items-center">
-      <div className="flex-2 pr-8">
+    <header className="p-8 w-full flex flex-col md:flex-row items-center gap-8">
+      <div className="flex-2">
         <h2 className="font-bold text-2xl md:text-4xl">
           {t('title')}
         </h2>
