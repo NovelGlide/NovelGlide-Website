@@ -5,7 +5,7 @@ import AppFooter from "@/app/app_sections/app_footer";
 
 export default function Home() {
   return (
-    <main className="relative mx-auto min-h-screen max-w-3xl">
+    <main className="block relative mx-auto min-h-screen max-w-3xl">
       <AppNav />
       <AppHeader />
       <FeatureSection/>

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import NavLink from "@/app/app_sections/components/nav-link";
-import {Globe, Languages} from "lucide-react";
+import {Languages} from "lucide-react";
 import {useTranslations} from 'next-intl';
 
 export default function AppNav() {
-  const tLocale = useTranslations('AppHeader');
+  const tLocale = useTranslations('Locales');
 
   return (
-    <nav className="p-8 flex justify-between items-center">
+    <nav className="flex justify-between items-center mb-8">
       <div
         className="
           flex
@@ -16,11 +16,19 @@ export default function AppNav() {
         "
       >
         <Image
-          className="rounded-xl"
+          className="
+            w-8
+            h-8
+            sm:w-12
+            sm:h-12
+            rounded-lg
+            sm:rounded-xl
+          "
           src="/images/app_icon.png"
           alt="NovelGlide Logo"
           width={48}
           height={48}
+          sizes="32px 48px"
         />
         <h1 className="text-xl font-bold">
           <NavLink href="/" activeClassName="" exact>
@@ -32,7 +40,7 @@ export default function AppNav() {
         className="flex gap-4"
       >
         <li>
-          <NavLink href="/locale" exact aria-label={tLocale('languages')}>
+          <NavLink href="/locale" exact aria-label={tLocale('title')}>
             <Languages/>
           </NavLink>
         </li>

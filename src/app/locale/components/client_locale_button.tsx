@@ -23,6 +23,7 @@ export default function ClientLocaleButton({
         flex-col
         items-center
         justify-center
+        w-40
         px-8
         py-4
         rounded-4xl
@@ -37,6 +38,7 @@ export default function ClientLocaleButton({
         ease-in-out
         cursor-pointer
         disabled:cursor-default
+        box-border
       "
       onClick={() => {
         changeLocale(locale);

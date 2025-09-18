@@ -4,7 +4,7 @@ import {useTranslations} from "next-intl";
 export default function FeatureSection() {
   const t = useTranslations('FeatureSection');
   return (
-    <section id="features" className="mt-20 p-8">
+    <section id="features" className="mt-20 py-8">
       <h3
         className="mb-4 text-center text-3xl font-bold leading-tight"
       >

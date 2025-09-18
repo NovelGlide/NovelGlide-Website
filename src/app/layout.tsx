@@ -26,7 +26,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth bg-stone-100 text-stone-800">
+    <html lang="en" className="p-4 sm:p-8 scroll-smooth bg-stone-100 text-stone-800">
       <body
         className={`
           ${geistSans.variable}

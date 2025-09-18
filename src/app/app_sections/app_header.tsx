@@ -11,7 +11,7 @@ export default function AppHeader() {
   const locale = useLocale();
 
   return (
-    <header className="p-8 w-full flex flex-col md:flex-row items-center gap-8">
+    <header className="py-8 w-full flex flex-col md:flex-row items-center gap-8">
       <div className="flex-2">
         <h2 className="font-bold text-2xl md:text-4xl">
           {t('title')}
@@ -22,13 +22,12 @@ export default function AppHeader() {
         <p className="mt-8">
           {t('description')}
         </p>
-        <p className="mt-8 flex items-center justify-evenly flex-wrap">
+        <p className="mt-8 flex items-center justify-evenly flex-wrap gap-4">
           <Link
             href="https://play.google.com/store/apps/details?id=com.kai_wu.novelglide"
             className="
               flex
               items-center
-              m-2
               p-4
               rounded-3xl
               font-bold
@@ -51,7 +50,6 @@ export default function AppHeader() {
             className="
               flex
               items-center
-              m-2
               p-4
               rounded-3xl
               font-bold
