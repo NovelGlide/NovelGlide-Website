@@ -12,7 +12,7 @@ export default function AppHeader() {
 
   return (
     <header className="py-8 w-full flex flex-col md:flex-row items-center gap-8">
-      <div className="flex-2">
+      <div className="md:flex-2">
         <h2 className="font-bold text-2xl md:text-4xl">
           {t('title')}
         </h2>
@@ -69,7 +69,7 @@ export default function AppHeader() {
           </Link>
         </p>
       </div>
-      <div className="flex-1">
+      <div className="md:flex-1">
         <Image
           className="w-full h-full border-4 shadow-xl rounded-4xl object-contain"
           src={`/images/screenshot_${locale}.png`}
