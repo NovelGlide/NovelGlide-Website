@@ -76,8 +76,8 @@ export default function AppHeader() {
           className="w-full h-full border-4 shadow-xl rounded-4xl object-contain"
           src={`/images/screenshot_${locale}.png`}
           alt="NovelGlide Screenshot"
-          width={0}
-          height={0}
+          width={1284}
+          height={2778}
           sizes="100vw"
         />
       </div>
