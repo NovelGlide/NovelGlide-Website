@@ -11,7 +11,11 @@
     "cloudFeatTitle": "Cloud Backup",
     "cloudFeatDescription": "You can back up your books, bookmarks, and collections to your personal cloud drive. Also, you can easily restore your backups from your cloud drive.",
     "exploreFeatTitle": "OPDS Support",
-    "exploreFeatDescription": "NovelGlide support reading the catalog in Open Publication Distribution System (OPDS) format. You can download books from an OPDS server to your bookshelf."
+    "exploreFeatDescription": "NovelGlide support reading the catalog in Open Publication Distribution System (OPDS) format. You can download books from an OPDS server to your bookshelf.",
+    "collectionTitle": "Collections",
+    "collectionDescription": "Create your own collections to categorize books and arrange them in any order you want.",
+    "bookmarkTitle": "Bookmarks",
+    "bookmarkDescription": "You can manually save your place with a bookmark or let the app automatically save it for you, so you can always jump back to where you left off."
   },
   "General": {
     "privacyPolicy": "Privacy Policy"

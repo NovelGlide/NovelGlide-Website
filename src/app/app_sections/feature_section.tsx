@@ -10,9 +10,21 @@ export default function FeatureSection() {
       >
         {t('title')}
       </h3>
-      <FeatureCard title={t('customFeatTitle')}>
-        {t('customFeatDescription')}
+      <FeatureCard title={t('collectionTitle')}>
+        {t('collectionDescription')}
       </FeatureCard>
+      <div className="flex flex-col md:flex-row flex-wrap items-stretch mt-8 gap-8">
+        <div className="flex-1">
+          <FeatureCard title={t('bookmarkTitle')}>
+            {t('bookmarkDescription')}
+          </FeatureCard>
+        </div>
+        <div className="flex-1">
+          <FeatureCard title={t('customFeatTitle')}>
+            {t('customFeatDescription')}
+          </FeatureCard>
+        </div>
+      </div>
       <div className="flex flex-col md:flex-row flex-wrap items-stretch mt-8 gap-8">
         <div className="flex-1">
           <FeatureCard title={t('cloudFeatTitle')}>

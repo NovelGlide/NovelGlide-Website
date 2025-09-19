@@ -11,7 +11,11 @@
     "cloudFeatTitle": "云端同步与备份",
     "cloudFeatDescription": "可将书籍、书签和收藏备份至你的个人云盘，也可从云端恢复数据，确保阅读进度永不丢失。",
     "exploreFeatTitle": "支持 OPDS",
-    "exploreFeatDescription": "NovelGlide 支持 Open Publication Distribution System (OPDS) 目录。你也可以直接从 OPDS 服务器下载书籍，丰富你的书库。"
+    "exploreFeatDescription": "NovelGlide 支持 Open Publication Distribution System (OPDS) 目录。你也可以直接从 OPDS 服务器下载书籍，丰富你的书库。",
+    "collectionTitle": "收藏",
+    "collectionDescription": "创建你自己的收藏集来对书籍进行分类，并按照你想要的任何顺序排列。",
+    "bookmarkTitle": "书签",
+    "bookmarkDescription": "你可以手动保存位置或让应用自动保存，这样你就可以随时跳回到上次离开的地方。"
   },
   "General": {
     "privacyPolicy": "隐私政策"
