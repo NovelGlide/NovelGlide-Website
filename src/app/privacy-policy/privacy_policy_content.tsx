@@ -14,7 +14,7 @@ export default function PrivacyPolicyContent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const url = LocaleUtils.getManualUrl('privacy_policy', locale);
+  const url = LocaleUtils.getManualUrl('privacy-policy', locale);
 
   useEffect(() => {
     setLoading(true);
