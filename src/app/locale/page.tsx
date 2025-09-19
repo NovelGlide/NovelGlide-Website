@@ -3,6 +3,22 @@ import AppNav from "@/presentation/app_components/app_nav";
 import SupportedLocales from "@/i18n/support_locales";
 import LocaleButton from "@/app/locale/components/locale_button";
 import {useTranslations} from "next-intl";
+import {getTranslations} from "next-intl/server";
+
+type Props = {
+  params: {
+    locale: string,
+  }
+}
+
+export async function generateMetadata(params: Props): Promise<object> {
+  const {locale} = params.params;
+  const t = await getTranslations({locale, namespace: 'Locales'}); // Load translations for metadata
+
+  return {
+    title: t('title'),
+  };
+}
 
 export default function Home() {
   const t = useTranslations('Locales');

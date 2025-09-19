@@ -16,7 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NovelGlide",
+  title:  {
+    template: '%s | NovelGlide', // %s will be replaced by the page-specific title
+    default: 'NovelGlide', // Fallback title for pages without a specific title
+  },
   description: "Your personal e-book reader and library manager.",
 };
 
