@@ -9,7 +9,6 @@ import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
 export default function PrivacyPolicyContent() {
-
   const locale = useLocale();
   const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState(false);

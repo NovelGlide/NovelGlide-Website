@@ -16,6 +16,14 @@
   "General": {
     "privacyPolicy": "Privacy Policy"
   },
+  "LoadingComponent": {
+    "loading": "Loading...",
+    "description": "Please wait while we load the content for you."
+  },
+  "ErrorComponent": {
+    "error": "An error occurred",
+    "description": "Sorry, something went wrong while loading the content. Please try again later."
+  },
   "Locales": {
     "title": "Languages",
     "en": "English",

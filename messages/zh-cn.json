@@ -16,6 +16,10 @@
   "General": {
     "privacyPolicy": "隐私政策"
   },
+  "LoadingComponent": {
+    "loading": "加载中...",
+    "description": "正在为你加载内容，请稍候。"
+  },
   "Locales": {
     "title": "语言",
     "en": "英语",

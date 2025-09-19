@@ -16,6 +16,10 @@
   "General": {
     "privacyPolicy": "隱私權政策"
   },
+  "LoadingComponent": {
+    "loading": "載入中...",
+    "description": "正在為你載入內容，請稍候。"
+  },
   "Locales": {
     "title": "語言",
     "en": "英文",
