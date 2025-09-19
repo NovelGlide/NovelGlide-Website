@@ -1,4 +1,4 @@
-import FeatureCard from "@/app/app_sections/components/feature-card";
+import FeatureCard from "@/presentation/app_components/feature-card";
 import {useTranslations} from "next-intl";
 
 export default function FeatureSection() {

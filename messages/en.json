@@ -13,6 +13,9 @@
     "exploreFeatTitle": "OPDS Support",
     "exploreFeatDescription": "NovelGlide support reading the catalog in Open Publication Distribution System (OPDS) format. You can download books from an OPDS server to your bookshelf."
   },
+  "General": {
+    "privacyPolicy": "Privacy Policy"
+  },
   "Locales": {
     "title": "Languages",
     "en": "English",

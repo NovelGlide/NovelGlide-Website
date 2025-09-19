@@ -13,6 +13,9 @@
     "exploreFeatTitle": "支持 OPDS",
     "exploreFeatDescription": "NovelGlide 支持 Open Publication Distribution System (OPDS) 目录。你也可以直接从 OPDS 服务器下载书籍，丰富你的书库。"
   },
+  "General": {
+    "privacyPolicy": "隐私政策"
+  },
   "Locales": {
     "title": "语言",
     "en": "英语",

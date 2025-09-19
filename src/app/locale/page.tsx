@@ -1,5 +1,5 @@
-import AppFooter from "@/app/app_sections/app_footer";
-import AppNav from "@/app/app_sections/app_nav";
+import AppFooter from "@/presentation/app_components/app_footer";
+import AppNav from "@/presentation/app_components/app_nav";
 import SupportedLocales from "@/i18n/support_locales";
 import LocaleButton from "@/app/locale/components/locale_button";
 import {useTranslations} from "next-intl";

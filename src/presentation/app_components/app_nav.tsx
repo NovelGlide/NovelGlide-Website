@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NavLink from "@/app/app_sections/components/nav-link";
+import NavLink from "@/presentation/app_components/nav-link";
 import {Languages} from "lucide-react";
 import {useTranslations} from 'next-intl';
 

@@ -13,6 +13,9 @@
     "exploreFeatTitle": "OPDSに対応",
     "exploreFeatDescription": "NovelGlideは、Open Publication Distribution System (OPDS) カタログに対応しています。OPDSサーバーから直接本をダウンロードし、本棚に追加できます。"
   },
+  "General": {
+    "privacyPolicy": "プライバシーポリシー"
+  },
   "Locales": {
     "title": "言語",
     "en": "英語",
