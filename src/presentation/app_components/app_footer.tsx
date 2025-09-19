@@ -12,7 +12,7 @@ export default function AppFooter() {
           {tLocale('title')}
         </NavLink>
         <NavLink
-          href="/privacy_policy"
+          href="/privacy-policy"
           exact
           aria-label={t('privacyPolicy')}
         >
