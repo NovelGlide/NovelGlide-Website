@@ -24,7 +24,7 @@ export default function PrivacyPolicyContent() {
         .then((data) => setContent(data))
         .catch((err) => setError(err.message))
         .finally(() => setLoading(false));
-  });
+  }, [url]);
 
   if (loading) {
     return (<LoadingComponent />);
