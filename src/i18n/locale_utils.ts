@@ -2,7 +2,9 @@ export class LocaleUtils {
   static mapToResourceLocale(locale: string): string {
     switch (locale) {
       case 'zh-tw':
-        return 'zh';
+        return 'zh-Hant-TW';
+      case 'zh-cn':
+        return 'zh-Hans-CN';
     }
 
     return locale;
