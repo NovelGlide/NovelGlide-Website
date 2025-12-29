@@ -1,10 +1,11 @@
-import type {Metadata} from "next";
-import {Geist, Geist_Mono} from "next/font/google";
-import {NextIntlClientProvider} from 'next-intl';
-import {Analytics} from "@vercel/analytics/next";
-import {SpeedInsights} from "@vercel/speed-insights/next";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { NextIntlClientProvider } from 'next-intl';
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import React from "react";
+import { getLocale } from "next-intl/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,25 +26,27 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
-                                           children,
-                                         }: Readonly<{
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html lang="en" className="p-4 sm:p-8 scroll-smooth bg-stone-100 text-stone-800">
-    <body
-      className={`
+    <html lang={locale} className="p-4 sm:p-8 scroll-smooth bg-stone-100 text-stone-800">
+      <body
+        className={`
           ${geistSans.variable}
           ${geistMono.variable}
           antialiased
         `}
-    >
-    <NextIntlClientProvider>
-      {children}
-    </NextIntlClientProvider>
-    <Analytics/>
-    <SpeedInsights/>
-    </body>
+      >
+        <NextIntlClientProvider>
+          {children}
+        </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
