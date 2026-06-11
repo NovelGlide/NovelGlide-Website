@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+# Pre-commit secret scan — blocks a commit that stages a credential / key / token,
+# so a secret never even lands in this PUBLIC repo's history.
+#
+# One-time activation (per clone), from the repo root:
+#     git config core.hooksPath .githooks
+# Requires gitleaks:
+#     brew install gitleaks            # https://github.com/gitleaks/gitleaks
+#
+# The CI workflow (.github/workflows/secret-scan.yml) re-scans on push as a
+# server-side backstop, so this hook is your first line, not your only one.
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  printf '%s\n' \
+    "⚠️  gitleaks not installed — local secret scan skipped." \
+    "   Install it so this hook can protect you:  brew install gitleaks" \
+    "   (CI still scans on push.)"
+  exit 0
+fi
+
+# Scan only what is staged for this commit (gitleaks 8.18+ `git --staged`).
+gitleaks git --staged --redact --no-banner
+code=$?
+
+if [ "$code" -eq 1 ]; then
+  printf '%s\n' \
+    "" \
+    "❌ gitleaks found a potential secret in your staged changes — commit blocked." \
+    "   • Remove it from the diff." \
+    "   • ROTATE it if it was ever a real credential — a pushed secret stays in" \
+    "     git history (and forks/caches) even after you delete the line." \
+    "   • False positive? add an allowlist rule to .gitleaks.toml," \
+    "     or bypass this once with:  git commit --no-verify"
+  exit 1
+fi
+
+if [ "$code" -ne 0 ]; then
+  # Non-1 exit = gitleaks itself errored (not a detected secret). Don't wedge the
+  # founder's workflow over a tooling hiccup — warn and allow; CI still scans.
+  printf '%s\n' \
+    "⚠️  gitleaks exited $code (tool error, not a detected secret) — allowing commit." \
+    "   CI will still scan on push."
+  exit 0
+fi
+
+exit 0
