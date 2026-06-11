@@ -12,6 +12,6 @@ export class LocaleUtils {
 
   static getManualUrl(folderUrl: string, locale: string): string {
     const resourceLocale = this.mapToResourceLocale(locale);
-    return `https://novelglide.github.io/${folderUrl}/${resourceLocale}.md`;
+    return `https://novelglide-cdn.kai-wu.net/${folderUrl}/${resourceLocale}.md`;
   }
 };
