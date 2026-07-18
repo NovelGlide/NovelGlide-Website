@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import "./globals.css";
+import "../globals.css";
 import React from "react";
-import { getLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
+import { toBcp47 } from "@/i18n/alternates";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +21,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  // Resolves relative alternates (canonical / hreflang) to absolute URLs.
+  metadataBase: new URL('https://novelglide.kai-wu.net'),
   title: {
     template: '%s | NovelGlide', // %s will be replaced by the page-specific title
     default: 'NovelGlide', // Fallback title for pages without a specific title
@@ -25,15 +30,27 @@ export const metadata: Metadata = {
   description: "Your personal e-book reader and library manager.",
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+type Props = Readonly<{
   children: React.ReactNode;
-}>) {
-  const locale = await getLocale();
+  params: Promise<{ locale: string }>;
+}>;
+
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
+  // Enable static rendering for this locale.
+  setRequestLocale(locale);
 
   return (
-    <html lang={locale} className="p-4 sm:p-8 scroll-smooth bg-stone-100 text-stone-800">
+    <html lang={toBcp47(locale)} className="p-4 sm:p-8 scroll-smooth bg-stone-100 text-stone-800">
       <body
         className={`
           ${geistSans.variable}

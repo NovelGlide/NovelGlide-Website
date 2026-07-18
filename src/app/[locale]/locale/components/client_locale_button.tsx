@@ -1,8 +1,7 @@
 'use client';
 
 import SupportedLocales from "@/i18n/support_locales";
-import changeLocale from "@/i18n/change_locale";
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "@/i18n/navigation";
 
 export default function ClientLocaleButton({
                                              locale,
@@ -14,6 +13,7 @@ export default function ClientLocaleButton({
   originalTranslation: string,
 }>) {
   const router = useRouter();
+  const pathname = usePathname();
   const isActive = currentTranslation === originalTranslation;
 
   return (
@@ -41,8 +41,10 @@ export default function ClientLocaleButton({
         box-border
       "
       onClick={() => {
-        changeLocale(locale);
-        router.refresh();
+        // Switch locale by navigating to the same path under the target locale.
+        // next-intl's usePathname returns the locale-agnostic path, so this keeps
+        // the user on the current page while changing the language prefix.
+        router.replace(pathname, {locale});
       }}
       disabled={isActive}
     >
