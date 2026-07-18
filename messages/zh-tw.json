@@ -24,6 +24,10 @@
     "loading": "載入中...",
     "description": "正在為你載入內容，請稍候。"
   },
+  "ErrorComponent": {
+    "error": "發生錯誤",
+    "description": "抱歉，載入內容時發生問題，請稍後再試。"
+  },
   "Locales": {
     "title": "語言",
     "en": "英文",

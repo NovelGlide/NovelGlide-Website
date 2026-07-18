@@ -24,6 +24,10 @@
     "loading": "加载中...",
     "description": "正在为你加载内容，请稍候。"
   },
+  "ErrorComponent": {
+    "error": "发生错误",
+    "description": "抱歉，加载内容时出现问题，请稍后重试。"
+  },
   "Locales": {
     "title": "语言",
     "en": "英语",
