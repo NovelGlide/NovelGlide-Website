@@ -16,7 +16,7 @@ export function toBcp47(locale: string): string {
 // Build the locale-prefixed path honouring `localePrefix: 'as-needed'`:
 // the default locale has no prefix, every other locale is prefixed with /<locale>.
 // `pathname` is the locale-agnostic path ('' for home, '/privacy-policy', ...).
-function localizedPath(locale: string, pathname: string): string {
+export function localizedPath(locale: string, pathname: string): string {
   const prefix = locale === defaultLocale ? '' : `/${locale}`;
   const path = `${prefix}${pathname}`;
   return path === '' ? '/' : path;

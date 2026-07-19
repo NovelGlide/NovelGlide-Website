@@ -4,7 +4,7 @@ import AppFooter from "@/presentation/app_components/app_footer";
 import AppNav from "@/presentation/app_components/app_nav";
 import {Link} from "@/i18n/navigation";
 import {routing} from "@/i18n/routing";
-import {buildAlternates} from "@/i18n/alternates";
+import {buildAlternates, localizedPath} from "@/i18n/alternates";
 import BlogRepository from "@/domain/blog_repository";
 
 // Regenerate hourly (ISR) — refreshes published posts + Notion signed image URLs.
@@ -25,7 +25,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   return {
     title: t("title"),
     // The index exists in every locale → default availableLocales (all).
-    alternates: buildAlternates(locale, "/blog"),
+    alternates: {
+      ...buildAlternates(locale, "/blog"),
+      // Advertise the per-locale RSS feed for autodiscovery.
+      types: {"application/rss+xml": localizedPath(locale, "/blog/rss.xml")},
+    },
   };
 }
 
@@ -60,7 +64,7 @@ export default async function BlogIndexPage({params}: Props) {
             {posts.map((post) => (
               <li
                 key={post.pageId}
-                className="rounded-xl border border-stone-200 p-5 transition-colors hover:border-stone-300 hover:bg-white"
+                className="rounded-[2rem] border border-stone-200 p-5 transition-colors hover:border-stone-300 hover:bg-white"
               >
                 <Link href={`/blog/${post.slug}`} className="group block">
                   <h3 className="text-xl font-semibold group-hover:underline">

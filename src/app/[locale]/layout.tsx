@@ -9,6 +9,7 @@ import "../globals.css";
 import React from "react";
 import { routing } from "@/i18n/routing";
 import { toBcp47 } from "@/i18n/alternates";
+import { SITE_URL } from "@/config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +23,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   // Resolves relative alternates (canonical / hreflang) to absolute URLs.
-  metadataBase: new URL('https://novelglide.kai-wu.net'),
+  metadataBase: new URL(SITE_URL),
   title: {
     template: '%s | NovelGlide', // %s will be replaced by the page-specific title
     default: 'NovelGlide', // Fallback title for pages without a specific title
