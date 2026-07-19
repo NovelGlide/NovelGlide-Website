@@ -35,8 +35,9 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 
   // hreflang lists ONLY the locales that actually have this post (+ x-default).
   const alternates = buildAlternates(locale, `/blog/${slug}`, locales);
-  const images = post.coverUrl ? [post.coverUrl] : undefined;
 
+  // og:image / twitter:image come from the co-located opengraph-image route
+  // (cover-if-present, else a generated title card).
   return {
     title: post.title,
     description: post.description,
@@ -46,14 +47,12 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
       title: post.title,
       description: post.description,
       publishedTime: post.date || undefined,
-      images,
       url: alternates.canonical,
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images,
     },
   };
 }
