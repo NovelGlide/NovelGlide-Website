@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import {usePathname} from 'next/navigation';
+import {Link, usePathname} from '@/i18n/navigation';
 import React from "react";
 
 const NavLink = ({
@@ -18,6 +17,8 @@ const NavLink = ({
   className?: string,
   exact?: boolean;
 }>) => {
+  // next-intl's usePathname returns the path WITHOUT the locale prefix, so the
+  // existing "/" and "/locale" comparisons keep working across all locales.
   const pathname = usePathname();
 
   const isActive = exact ? pathname === href : pathname.startsWith(href);

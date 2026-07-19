@@ -19,7 +19,7 @@ export default function PrivacyPolicyContent() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    
+
     HttpRepository.fetchMarkdown(url)
         .then((data) => setContent(data))
         .catch((err) => setError(err.message))

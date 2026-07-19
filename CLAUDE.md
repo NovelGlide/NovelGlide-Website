@@ -20,11 +20,9 @@ wired on the Vercel side; there is no manual deploy step and no
 dashboard). Don't add a deploy workflow — pushing `main` is the deploy.
 
 - `npm run dev` — local dev server (`next dev --turbopack`, port 3000).
-- `npm run build` — `next build --turbopack && next-sitemap`. The
-  `next-sitemap` step reads `VERCEL_PROJECT_PRODUCTION_URL`, a
-  Vercel-injected env var, so the sitemap's `siteUrl` is only correct in
-  the Vercel build environment (locally it resolves to `https://undefined`
-  — harmless, expected).
+- `npm run build` — `next build --turbopack`. Sitemap + robots are **native
+  routes** (`src/app/sitemap.ts` / `robots.ts`), not a post-build step —
+  `next-sitemap` was removed.
 - `npm run lint` — eslint.
 
 ## Privacy Content Is Not In This Repo (the load-bearing quirk)
@@ -86,20 +84,67 @@ So this site is the **presentation** of the privacy policy; R2 is its
 **content source**; the store setting points at this site and never has
 to change when the content source moves.
 
+## Blog (Notion-backed — the one dynamic, indexable surface)
+
+Unlike the privacy page (client-fetched CSR, SEO doesn't matter), the **blog
+is server-rendered for SEO** — its whole reason to exist is promotion. Posts
+live in a **Notion database** and render as static HTML (SSG + ISR). To
+**publish** a post, use the **`/blog` skill** (`.claude/skills/blog/`) — this
+section is the rendering-side reference.
+
+- **Source of truth — Notion "Blog Posts" DB.** Env (Vercel, Preview +
+  Production, **Sensitive** so `vercel env pull` returns them EMPTY — they are
+  unavailable locally by design): `NOTION_BLOG_TOKEN` (read-only integration
+  scoped to just this DB) + `NOTION_BLOG_DB_ID`. No local token → `npm run
+  build` locally fetches **zero posts** and the data layer degrades to empty
+  (expected). **Verify blog content on the Vercel preview, not locally.**
+- **Data model — one row per (article × locale).** `Title`, `Slug` (the
+  language-neutral translation key), `Locale` (en/ja/zh-tw/zh-cn), `Status`
+  (Draft/Published — only Published renders), `Date`, `Description` (meta/OG),
+  `Cover` (files), `Tags` (multi_select of **slugs**). Rows sharing a `Slug`
+  are translations of ONE post. The article **body is the Notion page blocks**,
+  converted by `notion-to-md` and rendered through the shared `MarkdownViewer`.
+- **No duplicate content.** `generateStaticParams` emits one page per published
+  row → only real translations get a URL. Each post's hreflang lists exactly
+  the locales that have it; canonical is self-referential (never
+  cross-canonical translations). `localePrefix: 'as-needed'` keeps `en`
+  prefix-free.
+- **Tags = slugs + a fail-loud label mapping.** A row's `Tags` are
+  language-neutral slugs; the display label comes from the `Tags` namespace in
+  `messages/<locale>.json`. A slug with **no mapping THROWS during SSG**
+  (`TagList`) — the build fails loudly rather than shipping a raw slug. So
+  **every tag slug MUST have a `Tags.<slug>` entry in all four
+  `messages/*.json`**, or the deploy breaks (the `/blog` skill validates this
+  before publishing).
+- **SEO surfaces.** `app/sitemap.ts` + `app/robots.ts` (native, reuse
+  `BlogRepository`, per-URL hreflang), per-locale RSS at
+  `/[locale]/blog/rss.xml`, and generated OG cards via
+  `[slug]/opengraph-image.tsx` (cover-if-present else a title card; CJK titles
+  load a per-locale Noto subset).
+- **Deferred — Notion inline-image rehosting.** `notion-to-md` emits body
+  images as Notion **signed URLs (~1h expiry)**; the ISR 1h window refreshes
+  them, but a proper rehost-to-our-origin is a TODO (marked in
+  `blog_repository_data.ts`) — do it when the first image-heavy post ships.
+
 ## Structure
 
-Loosely mirrors the app's clean-architecture layering:
+Loosely mirrors the app's clean-architecture layering. Locale is **path-based**
+(`src/app/[locale]/…`, next-intl `localePrefix: 'as-needed'`, so `en` is
+prefix-free) — there is no locale cookie.
 
-- `src/app/` — Next.js App Router (pages, layout, locale routing,
-  `privacy-policy/`).
-- `src/domain/http_repository.ts` — the fetch contract (static facade).
-- `src/data/http_repository_data.ts` — the actual `fetch()` impl.
+- `src/app/[locale]/` — App Router pages (home, `privacy-policy/`, `blog/`) +
+  the root layout. `sitemap.ts` / `robots.ts` sit at `src/app/`.
+- `src/domain/` + `src/data/` — static-facade repositories:
+  `http_repository` (R2 markdown fetch) and `blog_repository` (Notion).
 - `src/presentation/` — shared components (nav, footer, markdown viewer,
-  loading / error states).
-- `src/i18n/` — next-intl wiring (`request.ts`, `support_locales.ts`,
-  `change_locale.ts`) + `locale_utils.ts` (the R2 URL builder + locale
-  mapping above).
-- `messages/` — next-intl UI-string catalogs (chrome only — see above).
+  tag list, loading / error states).
+- `src/i18n/` — next-intl routing (`routing.ts`, `navigation.ts`,
+  `request.ts`, `support_locales.ts`) + `alternates.ts` (the canonical /
+  hreflang builder) + `locale_utils.ts` (R2 URL builder). `middleware.ts` is at
+  the repo root.
+- `src/config/site.ts` — the canonical production origin (`SITE_URL`).
+- `messages/` — next-intl catalogs: UI chrome **and** the `Tags` label mapping
+  (§Blog). Never the privacy / blog document bodies.
 
 ## What This Is Not
 
@@ -108,5 +153,7 @@ Loosely mirrors the app's clean-architecture layering:
   *renders* it.
 - **Not the app** — the EPUB reader is `../NovelGlide-Flutter/`. This is
   the marketing/legal web surface only.
-- **Not a CMS** — content is plain markdown fetched from R2; there is no
-  authoring UI here.
+- **Not a CMS for privacy** — privacy content is plain markdown fetched from
+  R2; there is no authoring UI for it here. (The **blog** *is* Notion-backed —
+  see §Blog — a separate, server-rendered surface; publish via the `/blog`
+  skill.)

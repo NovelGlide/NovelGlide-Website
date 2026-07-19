@@ -20,6 +20,15 @@
   "General": {
     "privacyPolicy": "Privacy Policy"
   },
+  "Blog": {
+    "title": "Blog",
+    "nav": "Blog",
+    "empty": "No posts yet. Check back soon.",
+    "back": "Back to blog"
+  },
+  "Tags": {
+    "announcement": "Announcement"
+  },
   "LoadingComponent": {
     "loading": "Loading...",
     "description": "Please wait while we load the content for you."

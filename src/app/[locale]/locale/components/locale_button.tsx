@@ -1,6 +1,6 @@
 import SupportedLocales from "@/i18n/support_locales";
 import {getTranslations} from "next-intl/server";
-import ClientLocaleButton from "@/app/locale/components/client_locale_button";
+import ClientLocaleButton from "@/app/[locale]/locale/components/client_locale_button";
 
 export default async function LocaleButton({
                                        locale

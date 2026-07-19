@@ -20,9 +20,22 @@
   "General": {
     "privacyPolicy": "隱私權政策"
   },
+  "Blog": {
+    "title": "部落格",
+    "nav": "部落格",
+    "empty": "目前還沒有文章，敬請期待。",
+    "back": "回到文章列表"
+  },
+  "Tags": {
+    "announcement": "公告"
+  },
   "LoadingComponent": {
     "loading": "載入中...",
     "description": "正在為你載入內容，請稍候。"
+  },
+  "ErrorComponent": {
+    "error": "發生錯誤",
+    "description": "抱歉，載入內容時發生問題，請稍後再試。"
   },
   "Locales": {
     "title": "語言",

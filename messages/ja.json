@@ -20,9 +20,22 @@
   "General": {
     "privacyPolicy": "プライバシーポリシー"
   },
+  "Blog": {
+    "title": "ブログ",
+    "nav": "ブログ",
+    "empty": "まだ記事がありません。近日公開予定です。",
+    "back": "ブログ一覧へ戻る"
+  },
+  "Tags": {
+    "announcement": "お知らせ"
+  },
   "LoadingComponent": {
     "loading": "読み込み中...",
     "description": "コンテンツを読み込んでいます。しばらくお待ちください。"
+  },
+  "ErrorComponent": {
+    "error": "エラーが発生しました",
+    "description": "申し訳ございません。コンテンツの読み込み中に問題が発生しました。時間をおいて再度お試しください。"
   },
   "Locales": {
     "title": "言語",

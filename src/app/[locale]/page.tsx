@@ -1,7 +1,21 @@
+import type { Metadata } from "next";
 import HeaderSection from "@/app/app_sections/header_section";
 import AppNav from "@/presentation/app_components/app_nav";
 import FeatureSection from "@/app/app_sections/feature_section";
 import AppFooter from "@/presentation/app_components/app_footer";
+import { buildAlternates } from "@/i18n/alternates";
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    alternates: buildAlternates(locale, ''),
+  };
+}
 
 export default function Home() {
   return (
