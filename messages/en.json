@@ -23,7 +23,11 @@
   "Blog": {
     "title": "Blog",
     "nav": "Blog",
-    "empty": "No posts yet. Check back soon."
+    "empty": "No posts yet. Check back soon.",
+    "back": "Back to blog"
+  },
+  "Tags": {
+    "announcement": "Announcement"
   },
   "LoadingComponent": {
     "loading": "Loading...",

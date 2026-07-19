@@ -23,7 +23,11 @@
   "Blog": {
     "title": "博客",
     "nav": "博客",
-    "empty": "目前还没有文章，敬请期待。"
+    "empty": "目前还没有文章，敬请期待。",
+    "back": "返回文章列表"
+  },
+  "Tags": {
+    "announcement": "公告"
   },
   "LoadingComponent": {
     "loading": "加载中...",

@@ -1,9 +1,12 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
-import {setRequestLocale} from "next-intl/server";
+import {getTranslations, setRequestLocale} from "next-intl/server";
+import {ArrowLeft} from "lucide-react";
 import AppFooter from "@/presentation/app_components/app_footer";
 import AppNav from "@/presentation/app_components/app_nav";
+import TagList from "@/presentation/app_components/tag_list";
 import MarkdownViewer from "@/presentation/markdown_viewer/markdown_viewer";
+import {Link} from "@/i18n/navigation";
 import {buildAlternates} from "@/i18n/alternates";
 import BlogRepository from "@/domain/blog_repository";
 
@@ -75,11 +78,19 @@ export default async function BlogPostPage({params}: Props) {
   }
 
   const markdown = await BlogRepository.getPostMarkdown(post.pageId);
+  const tBlog = await getTranslations({locale, namespace: "Blog"});
 
   return (
     <main className="relative mx-auto min-h-screen max-w-3xl">
       <AppNav/>
       <article className="my-8">
+        <Link
+          href="/blog"
+          className="mb-6 inline-flex items-center gap-1 text-sm text-stone-500 transition-colors hover:text-stone-700"
+        >
+          <ArrowLeft className="h-4 w-4"/>
+          {tBlog("back")}
+        </Link>
         <header className="mb-8">
           <h1 className="text-3xl font-bold">{post.title}</h1>
           {post.date && (
@@ -90,18 +101,7 @@ export default async function BlogPostPage({params}: Props) {
               {formatDate(post.date)}
             </time>
           )}
-          {post.tags.length > 0 && (
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <li
-                  key={tag}
-                  className="rounded-full bg-stone-200 px-3 py-1 text-xs text-stone-700"
-                >
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          )}
+          <TagList tags={post.tags} locale={locale}/>
         </header>
         <MarkdownViewer content={markdown}/>
       </article>

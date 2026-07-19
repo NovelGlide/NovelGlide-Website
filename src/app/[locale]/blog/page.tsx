@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import {getTranslations, setRequestLocale} from "next-intl/server";
 import AppFooter from "@/presentation/app_components/app_footer";
 import AppNav from "@/presentation/app_components/app_nav";
+import TagList from "@/presentation/app_components/tag_list";
 import {Link} from "@/i18n/navigation";
 import {routing} from "@/i18n/routing";
 import {buildAlternates, localizedPath} from "@/i18n/alternates";
@@ -84,18 +85,7 @@ export default async function BlogIndexPage({params}: Props) {
                     </p>
                   )}
                 </Link>
-                {post.tags.length > 0 && (
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="rounded-full bg-stone-200 px-3 py-1 text-xs text-stone-700"
-                      >
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <TagList tags={post.tags} locale={locale}/>
               </li>
             ))}
           </ul>
