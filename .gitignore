@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# next-sitemap output (regenerated at build with the correct siteUrl on Vercel;
+# locally it resolves to https://undefined, so never commit it)
+/public/robots.txt
+/public/sitemap.xml
+/public/sitemap-*.xml

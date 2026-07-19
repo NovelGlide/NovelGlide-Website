@@ -1,9 +1,10 @@
 import Image from "next/image";
 import NavLink from "@/presentation/app_components/nav-link";
-import {Languages} from "lucide-react";
+import {Languages, Newspaper} from "lucide-react";
 import {useTranslations} from 'next-intl';
 
 export default function AppNav() {
+  const tBlog = useTranslations('Blog');
   const tLocale = useTranslations('Locales');
 
   return (
@@ -39,6 +40,11 @@ export default function AppNav() {
       <ul
         className="flex gap-4"
       >
+        <li>
+          <NavLink href="/blog" aria-label={tBlog('nav')}>
+            <Newspaper/>
+          </NavLink>
+        </li>
         <li>
           <NavLink href="/locale" exact aria-label={tLocale('title')}>
             <Languages/>

@@ -20,6 +20,11 @@
   "General": {
     "privacyPolicy": "プライバシーポリシー"
   },
+  "Blog": {
+    "title": "ブログ",
+    "nav": "ブログ",
+    "empty": "まだ記事がありません。近日公開予定です。"
+  },
   "LoadingComponent": {
     "loading": "読み込み中...",
     "description": "コンテンツを読み込んでいます。しばらくお待ちください。"
