@@ -24,12 +24,20 @@
     "title": "Blog",
     "nav": "Blog",
     "empty": "No posts yet. Check back soon.",
-    "back": "Back to blog"
+    "back": "Back to blog",
+    "taggedTitle": "Posts tagged “{tag}”"
   },
   "Tags": {
     "announcement": "Announcement",
     "guides": "Guides",
-    "features": "Features"
+    "features": "Features",
+    "getting-started": "Getting Started",
+    "text-to-speech": "Text-to-Speech",
+    "dictionary": "Dictionary",
+    "cloud-sync": "Cloud Sync",
+    "vertical-writing": "Vertical Writing",
+    "language-learning": "Language Learning",
+    "privacy": "Privacy"
   },
   "LoadingComponent": {
     "loading": "Loading...",

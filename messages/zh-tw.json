@@ -24,12 +24,20 @@
     "title": "部落格",
     "nav": "部落格",
     "empty": "目前還沒有文章，敬請期待。",
-    "back": "回到文章列表"
+    "back": "回到文章列表",
+    "taggedTitle": "「{tag}」的文章"
   },
   "Tags": {
     "announcement": "公告",
     "guides": "教學指南",
-    "features": "功能介紹"
+    "features": "功能介紹",
+    "getting-started": "入門",
+    "text-to-speech": "語音朗讀",
+    "dictionary": "字典",
+    "cloud-sync": "雲端同步",
+    "vertical-writing": "直書",
+    "language-learning": "語言學習",
+    "privacy": "隱私"
   },
   "LoadingComponent": {
     "loading": "載入中...",

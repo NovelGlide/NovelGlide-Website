@@ -1,4 +1,5 @@
 import {getTranslations} from "next-intl/server";
+import {Link} from "@/i18n/navigation";
 
 // Renders tag pills. Tags are stored as language-neutral slugs on the Notion
 // row; the display label comes from the `Tags` message namespace per locale.
@@ -30,11 +31,13 @@ export default async function TagList({
   return (
     <ul className="mt-3 flex flex-wrap gap-2">
       {tags.map((slug) => (
-        <li
-          key={slug}
-          className="rounded-full bg-stone-200 px-3 py-1 text-xs text-stone-700"
-        >
-          {t(slug)}
+        <li key={slug}>
+          <Link
+            href={`/blog/tag/${slug}`}
+            className="inline-block rounded-full bg-stone-200 px-3 py-1 text-xs text-stone-700 transition-colors hover:bg-stone-300"
+          >
+            {t(slug)}
+          </Link>
         </li>
       ))}
     </ul>

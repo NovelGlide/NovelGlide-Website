@@ -24,12 +24,20 @@
     "title": "博客",
     "nav": "博客",
     "empty": "目前还没有文章，敬请期待。",
-    "back": "返回文章列表"
+    "back": "返回文章列表",
+    "taggedTitle": "「{tag}」的文章"
   },
   "Tags": {
     "announcement": "公告",
     "guides": "教程指南",
-    "features": "功能介绍"
+    "features": "功能介绍",
+    "getting-started": "入门",
+    "text-to-speech": "语音朗读",
+    "dictionary": "词典",
+    "cloud-sync": "云端同步",
+    "vertical-writing": "竖排",
+    "language-learning": "语言学习",
+    "privacy": "隐私"
   },
   "LoadingComponent": {
     "loading": "加载中...",
