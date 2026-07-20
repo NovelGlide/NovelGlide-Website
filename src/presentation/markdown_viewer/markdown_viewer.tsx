@@ -10,16 +10,16 @@ export default function MarkdownViewer({
     <ReactMarkdown 
       remarkPlugins={[remarkGfm]}
       components={{
-        h1: ({...props}) => <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />,
-        h2: ({...props}) => <h2 className="text-2xl font-bold my-4" {...props} />,
-        h3: ({...props}) => <h3 className="text-xl font-bold my-4" {...props} />,
-        h4: ({...props}) => <h4 className="text-lg font-bold my-4" {...props} />,
-        h5: ({...props}) => <h5 className="text-md font-bold my-4" {...props} />,
-        h6: ({...props}) => <h6 className="text-base font-bold my-4" {...props} />,
-        p: ({...props}) => <p className="my-2 leading-7" {...props} />,
-        ul: ({...props}) => <ul className="list-disc list-inside my-2" {...props} />,
-        ol: ({...props}) => <ol className="list-decimal list-inside my-2" {...props} />,
-        li: ({...props}) => <li className="my-1 ml-4" {...props} />,
+        h1: ({children}) => <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>,
+        h2: ({children}) => <h2 className="text-2xl font-bold my-4">{children}</h2>,
+        h3: ({children}) => <h3 className="text-xl font-bold my-4">{children}</h3>,
+        h4: ({children}) => <h4 className="text-lg font-bold my-4">{children}</h4>,
+        h5: ({children}) => <h5 className="text-md font-bold my-4">{children}</h5>,
+        h6: ({children}) => <h6 className="text-base font-bold my-4">{children}</h6>,
+        p: ({children}) => <p className="my-2 leading-7">{children}</p>,
+        ul: ({children}) => <ul className="list-disc list-inside my-2">{children}</ul>,
+        ol: ({children}) => <ol className="list-decimal list-inside my-2">{children}</ol>,
+        li: ({children}) => <li className="my-1 ml-4">{children}</li>,
         a: ({href, children}) => (
           <a
             href={href} 
