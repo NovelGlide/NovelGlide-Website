@@ -36,7 +36,7 @@ export default function Home() {
           className="
             flex
             flex-wrap
-            items-center
+            items-stretch
             justify-center
             my-8
             gap-8
