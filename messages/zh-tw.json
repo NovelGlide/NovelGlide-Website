@@ -25,7 +25,14 @@
     "nav": "部落格",
     "empty": "目前還沒有文章，敬請期待。",
     "back": "回到文章列表",
-    "taggedTitle": "「{tag}」的文章"
+    "taggedTitle": "「{tag}」的文章",
+    "browseByTopic": "依主題瀏覽"
+  },
+  "Download": {
+    "nav": "下載",
+    "title": "取得 NovelGlide",
+    "subtitle": "支援 iPhone、iPad 與 Android 的免費 EPUB 閱讀器。",
+    "qrHint": "用電腦看嗎？掃描 QR code 在手機上開啟。"
   },
   "Tags": {
     "announcement": "公告",

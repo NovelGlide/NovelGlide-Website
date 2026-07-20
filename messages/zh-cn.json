@@ -25,7 +25,14 @@
     "nav": "博客",
     "empty": "目前还没有文章，敬请期待。",
     "back": "返回文章列表",
-    "taggedTitle": "「{tag}」的文章"
+    "taggedTitle": "「{tag}」的文章",
+    "browseByTopic": "按主题浏览"
+  },
+  "Download": {
+    "nav": "下载",
+    "title": "获取 NovelGlide",
+    "subtitle": "支持 iPhone、iPad 与 Android 的免费 EPUB 阅读器。",
+    "qrHint": "用电脑看吗？扫描二维码在手机上打开。"
   },
   "Tags": {
     "announcement": "公告",

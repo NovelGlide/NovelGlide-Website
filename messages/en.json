@@ -25,7 +25,14 @@
     "nav": "Blog",
     "empty": "No posts yet. Check back soon.",
     "back": "Back to blog",
-    "taggedTitle": "Posts tagged “{tag}”"
+    "taggedTitle": "Posts tagged “{tag}”",
+    "browseByTopic": "Browse by topic"
+  },
+  "Download": {
+    "nav": "Download",
+    "title": "Get NovelGlide",
+    "subtitle": "A free EPUB reader for iPhone, iPad, and Android.",
+    "qrHint": "On a computer? Scan to open this on your phone."
   },
   "Tags": {
     "announcement": "Announcement",

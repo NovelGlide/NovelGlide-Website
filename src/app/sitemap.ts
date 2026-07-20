@@ -30,7 +30,7 @@ function entry(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allLocales = [...routing.locales];
-  const staticPaths = ["", "/blog", "/locale", "/privacy-policy"];
+  const staticPaths = ["", "/blog", "/locale", "/privacy-policy", "/download"];
   const entries: MetadataRoute.Sitemap = [];
 
   // Static pages exist in every locale.
