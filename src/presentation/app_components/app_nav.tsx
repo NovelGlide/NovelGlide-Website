@@ -1,6 +1,5 @@
 import Image from "next/image";
 import NavLink from "@/presentation/app_components/nav-link";
-import {Link} from "@/i18n/navigation";
 import {Languages, Newspaper} from "lucide-react";
 import {useTranslations} from 'next-intl';
 
@@ -53,12 +52,14 @@ export default function AppNav() {
           </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             href="/download"
+            exact
             className="rounded-full bg-zinc-800 px-4 py-2 text-sm font-bold text-stone-50 transition-colors duration-300 ease-in-out hover:bg-sky-500 hover:text-amber-50"
+            activeClassName="opacity-60 pointer-events-none"
           >
             {tDownload('nav')}
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </nav>
