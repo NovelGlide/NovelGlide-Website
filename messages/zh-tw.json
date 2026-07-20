@@ -27,7 +27,9 @@
     "back": "回到文章列表"
   },
   "Tags": {
-    "announcement": "公告"
+    "announcement": "公告",
+    "guides": "教學指南",
+    "features": "功能介紹"
   },
   "LoadingComponent": {
     "loading": "載入中...",
