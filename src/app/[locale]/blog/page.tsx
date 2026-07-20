@@ -3,6 +3,7 @@ import {getTranslations, setRequestLocale} from "next-intl/server";
 import AppFooter from "@/presentation/app_components/app_footer";
 import AppNav from "@/presentation/app_components/app_nav";
 import TagList from "@/presentation/app_components/tag_list";
+import BrowseByTopic from "@/presentation/app_components/browse_by_topic";
 import {Link} from "@/i18n/navigation";
 import {routing} from "@/i18n/routing";
 import {buildAlternates, localizedPath} from "@/i18n/alternates";
@@ -52,11 +53,26 @@ export default async function BlogIndexPage({params}: Props) {
   const t = await getTranslations({locale, namespace: "Blog"});
   const posts = await BlogRepository.getPostsForLocale(locale);
 
+  // Tag counts for the "Browse by topic" strip, most-used first.
+  const tagCounts = (() => {
+    const counts = new Map<string, number>();
+    for (const post of posts) {
+      for (const tag of post.tags) {
+        counts.set(tag, (counts.get(tag) ?? 0) + 1);
+      }
+    }
+    return [...counts.entries()]
+      .map(([slug, count]) => ({slug, count}))
+      .sort((a, b) => b.count - a.count || a.slug.localeCompare(b.slug));
+  })();
+
   return (
     <main className="relative mx-auto min-h-screen max-w-3xl">
       <AppNav/>
       <div className="my-8">
         <h2 className="text-2xl font-bold mb-6">{t("title")}</h2>
+
+        <BrowseByTopic tags={tagCounts} locale={locale}/>
 
         {posts.length === 0 ? (
           <p className="text-stone-500">{t("empty")}</p>

@@ -28,7 +28,7 @@ const NavLink = ({
     classNameList.push(activeClassName);
 
     return (
-      <span className={classNameList.join(' ')} {...props}>
+      <span className={classNameList.join(' ')} aria-current="page" {...props}>
         {children}
       </span>
     );

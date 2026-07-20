@@ -31,4 +31,19 @@ export default class BlogRepository {
   static getPostMarkdown(pageId: string): Promise<string> {
     return this.data.getPostMarkdown(pageId);
   }
+
+  // Published rows for one locale carrying `tag` (Date-descending) — the tag page.
+  static getPostsByTag(tag: string, locale: string): Promise<BlogPostMeta[]> {
+    return this.data.getPostsByTag(tag, locale);
+  }
+
+  // Every (locale, tag) pair that has a post — tag-page static params.
+  static getTagLocalePairs(): Promise<{locale: string; tag: string}[]> {
+    return this.data.getTagLocalePairs();
+  }
+
+  // Locales that have a post for this tag — a tag page's hreflang set.
+  static getLocalesForTag(tag: string): Promise<string[]> {
+    return this.data.getLocalesForTag(tag);
+  }
 }

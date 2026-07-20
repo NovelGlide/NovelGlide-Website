@@ -20,7 +20,7 @@ export default function AppFooter() {
         </NavLink>
       </div>
       <p className="mt-4 text-sm text-zinc-600">
-        &copy; 2025 NovelGlide. All rights reserved.
+        &copy; 2025~2026 NovelGlide. All rights reserved.
       </p>
     </footer>
   );

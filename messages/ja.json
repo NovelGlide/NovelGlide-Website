@@ -24,12 +24,27 @@
     "title": "ブログ",
     "nav": "ブログ",
     "empty": "まだ記事がありません。近日公開予定です。",
-    "back": "ブログ一覧へ戻る"
+    "back": "ブログ一覧へ戻る",
+    "taggedTitle": "「{tag}」の記事",
+    "browseByTopic": "トピックで探す"
+  },
+  "Download": {
+    "nav": "ダウンロード",
+    "title": "NovelGlide を入手",
+    "subtitle": "iPhone・iPad・Android 対応の無料 EPUB リーダー。",
+    "qrHint": "パソコンで見ていますか？お使いのスマホ向けのコードをスキャンしてください。"
   },
   "Tags": {
     "announcement": "お知らせ",
     "guides": "ガイド",
-    "features": "機能"
+    "features": "機能",
+    "getting-started": "はじめに",
+    "text-to-speech": "読み上げ",
+    "dictionary": "辞書",
+    "cloud-sync": "クラウド同期",
+    "vertical-writing": "縦書き",
+    "language-learning": "語学学習",
+    "privacy": "プライバシー"
   },
   "LoadingComponent": {
     "loading": "読み込み中...",

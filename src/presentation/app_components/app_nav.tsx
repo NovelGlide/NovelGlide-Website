@@ -1,11 +1,12 @@
 import Image from "next/image";
 import NavLink from "@/presentation/app_components/nav-link";
-import {Languages, Newspaper} from "lucide-react";
+import {Download, Languages, Newspaper} from "lucide-react";
 import {useTranslations} from 'next-intl';
 
 export default function AppNav() {
   const tBlog = useTranslations('Blog');
   const tLocale = useTranslations('Locales');
+  const tDownload = useTranslations('Download');
 
   return (
     <nav className="flex justify-between items-center mb-8">
@@ -38,7 +39,7 @@ export default function AppNav() {
         </h1>
       </div>
       <ul
-        className="flex gap-4"
+        className="flex items-center gap-3 sm:gap-4"
       >
         <li>
           <NavLink href="/blog" aria-label={tBlog('nav')}>
@@ -48,6 +49,18 @@ export default function AppNav() {
         <li>
           <NavLink href="/locale" exact aria-label={tLocale('title')}>
             <Languages/>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            href="/download"
+            exact
+            aria-label={tDownload('nav')}
+            className="flex items-center gap-2 rounded-full bg-zinc-800 px-3 py-2 text-sm font-bold text-stone-50 transition-colors duration-300 ease-in-out hover:bg-sky-500 hover:text-amber-50 sm:px-4"
+            activeClassName="opacity-60 pointer-events-none"
+          >
+            <Download size={18}/>
+            <span className="hidden sm:inline">{tDownload('nav')}</span>
           </NavLink>
         </li>
       </ul>

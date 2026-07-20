@@ -30,7 +30,7 @@ function entry(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allLocales = [...routing.locales];
-  const staticPaths = ["", "/blog", "/locale", "/privacy-policy"];
+  const staticPaths = ["", "/blog", "/locale", "/privacy-policy", "/download"];
   const entries: MetadataRoute.Sitemap = [];
 
   // Static pages exist in every locale.
@@ -52,6 +52,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const post of posts) {
     const locales = localesBySlug.get(post.slug) ?? [post.locale];
     entries.push(entry(post.locale, `/blog/${post.slug}`, locales, post.date || undefined));
+  }
+
+  // Tag hub pages — only (locale, tag) with >= 2 posts are indexable (thinner tag
+  // pages are noindex, see the tag route), so only those enter the sitemap. Keep
+  // this threshold in sync with MIN_TAG_POSTS in the tag route.
+  const TAG_MIN_POSTS = 2;
+  const countByLocaleTag = new Map<string, number>();
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      const key = `${post.locale}\t${tag}`;
+      countByLocaleTag.set(key, (countByLocaleTag.get(key) ?? 0) + 1);
+    }
+  }
+  const indexableLocalesByTag = new Map<string, string[]>();
+  for (const [key, count] of countByLocaleTag) {
+    if (count >= TAG_MIN_POSTS) {
+      const [locale, tag] = key.split("\t");
+      indexableLocalesByTag.set(tag, [...(indexableLocalesByTag.get(tag) ?? []), locale]);
+    }
+  }
+  for (const [key, count] of countByLocaleTag) {
+    if (count >= TAG_MIN_POSTS) {
+      const [locale, tag] = key.split("\t");
+      const locales = indexableLocalesByTag.get(tag) ?? [locale];
+      entries.push(entry(locale, `/blog/tag/${tag}`, locales));
+    }
   }
 
   return entries;
