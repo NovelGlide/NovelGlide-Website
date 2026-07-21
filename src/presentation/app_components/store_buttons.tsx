@@ -5,7 +5,7 @@ import {FaApple, FaGooglePlay} from "react-icons/fa6";
 // on the home hero and the /download page so the URLs live in one place.
 export const APP_STORE_URL =
   "https://apps.apple.com/tw/app/novelglide/id6748090356";
-const PLAY_BASE =
+export const PLAY_BASE =
   "https://play.google.com/store/apps/details?id=com.kai_wu.novelglide";
 
 // Google Play install-referrer carries UTM so nav/page-driven installs are

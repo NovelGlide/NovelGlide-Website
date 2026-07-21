@@ -7,7 +7,9 @@ import AppNav from "@/presentation/app_components/app_nav";
 import TagList from "@/presentation/app_components/tag_list";
 import MarkdownViewer from "@/presentation/markdown_viewer/markdown_viewer";
 import {Link} from "@/i18n/navigation";
-import {buildAlternates} from "@/i18n/alternates";
+import {buildAlternates, localizedPath} from "@/i18n/alternates";
+import {SITE_URL} from "@/config/site";
+import {JsonLd, blogPostingLd, breadcrumbLd} from "@/presentation/app_components/json_ld";
 import BlogRepository from "@/domain/blog_repository";
 
 // Regenerate hourly (ISR) — refreshes body + Notion signed image URLs (~1h TTL).
@@ -79,8 +81,17 @@ export default async function BlogPostPage({params}: Props) {
   const markdown = await BlogRepository.getPostMarkdown(post.pageId);
   const tBlog = await getTranslations({locale, namespace: "Blog"});
 
+  const canonicalPath = localizedPath(locale, `/blog/${slug}`);
+  const breadcrumb = breadcrumbLd([
+    {name: "NovelGlide", url: `${SITE_URL}${localizedPath(locale, "")}`},
+    {name: tBlog("title"), url: `${SITE_URL}${localizedPath(locale, "/blog")}`},
+    {name: post.title, url: `${SITE_URL}${canonicalPath}`},
+  ]);
+
   return (
     <main className="relative mx-auto min-h-screen max-w-3xl">
+      <JsonLd data={blogPostingLd(post, canonicalPath)}/>
+      <JsonLd data={breadcrumb}/>
       <AppNav/>
       <article className="my-8">
         <Link

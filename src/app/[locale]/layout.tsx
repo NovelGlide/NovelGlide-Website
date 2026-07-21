@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import GoogleAnalytics from "@/presentation/app_components/google_analytics";
+import { JsonLd, organizationLd, websiteLd } from "@/presentation/app_components/json_ld";
 import "../globals.css";
 import React from "react";
 import { routing } from "@/i18n/routing";
@@ -63,6 +64,8 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider>
           {children}
         </NextIntlClientProvider>
+        <JsonLd data={organizationLd()} />
+        <JsonLd data={websiteLd()} />
         <Analytics />
         <SpeedInsights />
         <GoogleAnalytics />
