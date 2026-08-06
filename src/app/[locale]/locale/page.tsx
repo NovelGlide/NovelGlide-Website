@@ -18,6 +18,12 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   return {
     title: t('title'),
     alternates: buildAlternates(locale, '/locale'),
+    // Pure UI chrome (a language-switcher) with no unique content of its own —
+    // stays reachable and crawlable (follow: true) but shouldn't compete for
+    // a search result. Same reasoning as thin blog-tag pages
+    // (src/app/[locale]/blog/tag/[tag]/page.tsx); kept out of the sitemap too
+    // (see src/app/sitemap.ts).
+    robots: {index: false, follow: true},
   };
 }
 

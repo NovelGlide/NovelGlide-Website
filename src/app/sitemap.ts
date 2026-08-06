@@ -30,7 +30,11 @@ function entry(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allLocales = [...routing.locales];
-  const staticPaths = ["", "/blog", "/locale", "/privacy-policy", "/download"];
+  // "/locale" (the language-switcher page) is deliberately excluded — pure UI
+  // chrome with no unique content, and noindex'd in its own metadata (see
+  // src/app/[locale]/locale/page.tsx) for the same reason the sitemap
+  // shouldn't be telling Google to crawl it either.
+  const staticPaths = ["", "/blog", "/privacy-policy", "/download"];
   const entries: MetadataRoute.Sitemap = [];
 
   // Static pages exist in every locale.
