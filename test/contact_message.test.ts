@@ -16,16 +16,15 @@ function parse(overrides: Record<string, unknown>) {
 describe("parseContactMessage", () => {
   describe("NFC normalization", () => {
     it("composes decomposed text in every field", () => {
-      const decomposed = "Café";
-      const result = parse({message: decomposed, name: decomposed, email: "café@example.com"});
-      assert.equal(result?.message, "Café");
-      assert.equal(result?.name, "Café");
-      assert.equal(result?.email, "café@example.com");
+      const decomposed = "Cafe\u0301";
+      const result = parse({message: decomposed, name: decomposed});
+      assert.equal(result?.message, "Caf\u00E9");
+      assert.equal(result?.name, "Caf\u00E9");
     });
 
     it("measures the limit after composing", () => {
-      const decomposed = "é".repeat(CONTACT_NAME_MAX_LENGTH);
-      assert.equal(parse({name: decomposed})?.name, "é".repeat(CONTACT_NAME_MAX_LENGTH));
+      const decomposed = "e\u0301".repeat(CONTACT_NAME_MAX_LENGTH);
+      assert.equal(parse({name: decomposed})?.name, "\u00E9".repeat(CONTACT_NAME_MAX_LENGTH));
     });
   });
 
@@ -62,15 +61,15 @@ describe("parseContactMessage", () => {
 
   describe("invisible formatting characters", () => {
     it("strips bidi controls and zero-width characters from the name", () => {
-      assert.equal(parse({name: "‮Mi​ka⁦‍﻿⁩"})?.name, "Mika");
+      assert.equal(parse({name: "\u202EMi\u200Bka\u2066\u200D\uFEFF\u2069"})?.name, "Mika");
     });
 
     it("strips bidi controls and zero-width characters from the email", () => {
-      assert.equal(parse({email: "‮a​@exam⁧ple.com﻿"})?.email, "a@example.com");
+      assert.equal(parse({email: "\u202Ea\u200B@exam\u2067ple.com\uFEFF"})?.email, "a@example.com");
     });
 
     it("strips bidi controls from the message but keeps zero-width characters", () => {
-      assert.equal(parse({message: "a‪b‮c⁨d‍e"})?.message, "abcd‍e");
+      assert.equal(parse({message: "a\u202Ab\u202Ec\u2068d\u200De"})?.message, "abcd\u200De");
     });
   });
 
@@ -85,23 +84,62 @@ describe("parseContactMessage", () => {
     });
 
     it("treats a blank email as absent", () => {
-      assert.equal(parse({email: " ​ "})?.email, null);
+      assert.equal(parse({email: " \u200B "})?.email, null);
     });
 
     it("applies the length limit to the cleaned address", () => {
-      const local = "a".repeat(CONTACT_EMAIL_MAX_LENGTH - "@example.com".length);
-      assert.equal(parse({email: `${local}@example.com​​`})?.email, `${local}@example.com`);
-      assert.equal(parse({email: `a${local}@example.com`}), null);
+      // "a@" + three 63-letter labels + a 57-letter label + "co" = 254.
+      const domain = `${"b".repeat(63)}.`.repeat(3) + `${"c".repeat(57)}.co`;
+      const address = `a@${domain}`;
+      assert.equal(address.length, CONTACT_EMAIL_MAX_LENGTH);
+      assert.equal(parse({email: `${address}\u200B\u200B`})?.email, address);
+      assert.equal(parse({email: `a${address}`}), null);
+    });
+
+    it("accepts dot-atom local parts, plus-addressing and subdomains", () => {
+      for (const email of ["a+b@x.co", "first.last@mail.example.org", "o'neil_{x}~=$^|*!-@a-b.io"]) {
+        assert.equal(parse({email})?.email, email);
+      }
+    });
+
+    it("rejects URI metacharacters in the local part", () => {
+      for (const char of ["?", "#", "%", "&", "/", ";", ":", ",", "<", ">", "\"", "\\", "`", "(", ")", "[", "]"]) {
+        assert.equal(parse({email: `a${char}b@example.com`}), null, char);
+      }
+    });
+
+    it("rejects malformed dot-atoms and over-long local parts", () => {
+      assert.equal(parse({email: ".a@example.com"}), null);
+      assert.equal(parse({email: "a.@example.com"}), null);
+      assert.equal(parse({email: "a..b@example.com"}), null);
+      assert.equal(parse({email: `${"a".repeat(65)}@example.com`}), null);
+      assert.equal(parse({email: `${"a".repeat(64)}@example.com`})?.email, `${"a".repeat(64)}@example.com`);
+    });
+
+    it("rejects domains outside LDH labels with a 2+ letter TLD", () => {
+      for (const email of [
+        "a@example.c", "a@example.c0m", "a@-example.com", "a@example-.com",
+        "a@exa_mple.com", "a@example..com", "a@[127.0.0.1]", "a@example.com?subject=x",
+        `a@${"b".repeat(64)}.com`, "a@b@example.com",
+      ]) {
+        assert.equal(parse({email}), null, email);
+      }
+    });
+
+    it("rejects non-ASCII addresses, IDN domains included", () => {
+      assert.equal(parse({email: "caf\u00E9@example.com"}), null);
+      assert.equal(parse({email: "a@b\u00FCcher.de"}), null);
+      assert.equal(parse({email: "a@\u4F8B\u3048.jp"}), null);
     });
   });
 
   describe("emptiness after cleaning", () => {
     it("rejects a message that is empty once cleaned", () => {
-      assert.equal(parse({message: " \u0000‮\r\n\t "}), null);
+      assert.equal(parse({message: " \u0000\u202E\r\n\t "}), null);
     });
 
     it("turns a name that is empty once cleaned into null", () => {
-      assert.equal(parse({name: "​‮ \t"})?.name, null);
+      assert.equal(parse({name: "\u200B\u202E \t"})?.name, null);
     });
   });
 
@@ -119,7 +157,7 @@ describe("parseContactMessage", () => {
       // All of it would be stripped, so only the raw guard can reject it.
       const raw = "\u0000".repeat(CONTACT_MESSAGE_MAX_LENGTH * 4 + 1);
       assert.equal(parse({message: `ok${raw}`}), null);
-      assert.equal(parse({name: "​".repeat(CONTACT_NAME_MAX_LENGTH * 4 + 1)}), null);
+      assert.equal(parse({name: "\u200B".repeat(CONTACT_NAME_MAX_LENGTH * 4 + 1)}), null);
     });
   });
 

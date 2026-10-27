@@ -6,12 +6,13 @@ import {
   parseContactMessage,
   TurnstileUnreachableError,
 } from "@/domain/contact_message";
+import {readCappedBody} from "./capped_body";
 
 export const runtime = "nodejs";
 
-// The largest valid payload (5,000-character message, 2,048-character Turnstile
-// token, the short fields) stays far below this even fully escaped as JSON.
-const BODY_MAX_LENGTH = 32_000;
+// In UTF-8 bytes. The largest valid payload (5,000 CJK characters at 3 bytes
+// each, a 2,048-character Turnstile token, the short fields) stays well below.
+const BODY_MAX_BYTES = 32_000;
 // Cloudflare documents Turnstile tokens as at most 2,048 characters.
 const TURNSTILE_TOKEN_MAX_LENGTH = 2048;
 
@@ -23,8 +24,8 @@ function reply(status: number): Response {
 }
 
 export async function POST(request: Request): Promise<Response> {
-  const raw = await request.text();
-  if (raw.length > BODY_MAX_LENGTH) {
+  const raw = await readCappedBody(request, BODY_MAX_BYTES);
+  if (raw === null) {
     return reply(413);
   }
 

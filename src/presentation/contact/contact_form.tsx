@@ -3,6 +3,7 @@
 import Script from "next/script";
 import {useLocale, useTranslations} from "next-intl";
 import {type FormEvent, useCallback, useEffect, useId, useRef, useState} from "react";
+import {TURNSTILE_CONTACT_ACTION} from "@/config/turnstile";
 import ContactApiRepository from "@/domain/contact_api_repository";
 import {
   CONTACT_CATEGORIES,
@@ -19,6 +20,7 @@ import {
 type TurnstileApi = {
   render: (container: HTMLElement, options: {
     sitekey: string;
+    action: string;
     language: string;
     theme: "light";
     callback: (token: string) => void;
@@ -79,6 +81,7 @@ export default function ContactForm() {
     }
     widgetId.current = window.turnstile.render(widgetContainer.current, {
       sitekey: TURNSTILE_SITE_KEY,
+      action: TURNSTILE_CONTACT_ACTION,
       language: locale,
       theme: "light",
       callback: setTurnstileToken,

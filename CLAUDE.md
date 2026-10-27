@@ -160,9 +160,16 @@ reply. The device choice maps to `Platform`; the form asks for no app version.
   `Contact Name` on contact-form rows submitted more than a year ago and keeps
   the rest of the row.
 - **Logs never carry the sender's name, email or message** — only the failure kind.
-- **Local testing.** Cloudflare's test keys (site `1x00000000000000000000AA`,
-  secret `1x0000000000000000000000000000000AA`) always pass; without
-  `NOTION_FEEDBACK_TOKEN` the route answers 503 after verification. In
+- **Siteverify is checked in full.** Besides `success`, the result must carry
+  the widget action `contact` and a hostname allowed for the deployment
+  (`VERCEL_ENV`): production accepts only the `SITE_URL` host, a preview also
+  `*.vercel.app`, `next dev` only `localhost`. Each request sends a fresh
+  `idempotency_key`. The request body is capped at 32,000 UTF-8 bytes while
+  streaming, whatever `content-length` claims.
+- **Local testing.** Cloudflare's test site key `1x00000000000000000000AA`
+  renders a widget that always passes, but its siteverify answer carries
+  hostname `example.com` and no action, so the route rejects it with 403; a
+  full local submission needs a real key pair with `localhost` allowed. In
   `next dev`, use the `/en/…` path for English: un-prefixed paths 404 there
   (production serves them).
 

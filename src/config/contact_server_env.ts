@@ -1,4 +1,5 @@
 import "server-only";
+import type {TurnstileDeployment} from "@/data/turnstile_siteverify";
 
 // Secrets behind the contact form and its retention job. Each reader returns
 // null when the variable is unset or empty, and every caller fails closed on
@@ -26,4 +27,17 @@ export function readNotionRetentionToken(): string | null {
 
 export function readCronSecret(): string | null {
   return readSecret("CRON_SECRET");
+}
+
+// Vercel sets VERCEL_ENV on every deployment. Anything that is neither a
+// Vercel preview nor `next dev` gets the production rules, so an unknown
+// environment is checked as strictly as production.
+export function readTurnstileDeployment(): TurnstileDeployment {
+  if (process.env.VERCEL_ENV === "production") {
+    return "production";
+  }
+  if (process.env.VERCEL_ENV === "preview") {
+    return "preview";
+  }
+  return process.env.NODE_ENV === "development" ? "development" : "production";
 }

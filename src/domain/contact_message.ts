@@ -24,9 +24,18 @@ export type ContactMessage = {
   device: ContactDevice | null;
 };
 
-// Deliberately loose: the address is only ever used by a human replying, so
-// anything with one "@" and a dotted domain is accepted.
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// The address is shown in Notion as a mailto: link, so only characters with no
+// meaning in a URI are allowed. Local part: RFC 5322 dot-atom over atext minus
+// ? # % & / and backtick, at most 64 characters (RFC 5321). Domain: ASCII
+// letter-digit-hyphen labels and a letters-only TLD of 2+ characters. That
+// rejects IDN (non-ASCII) domains and non-ASCII local parts; a sender with one
+// can leave the field blank.
+const EMAIL_LOCAL_ATOM = "[A-Za-z0-9!$'*+=^_{|}~-]+";
+const EMAIL_PATTERN = new RegExp(
+  "^(?=[^@]{1,64}@)" +
+    EMAIL_LOCAL_ATOM + "(?:\\." + EMAIL_LOCAL_ATOM + ")*" +
+    "@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\\.)+[A-Za-z]{2,63}$",
+);
 
 // Raw input longer than this many times a field's limit is rejected before any
 // cleaning runs; cleaning only shortens text, so it could never fit.
@@ -38,10 +47,10 @@ const CONTROL_CHARS = /[\u0000-\u001F\u007F-\u009F]/g;
 const CONTROL_CHARS_EXCEPT_TAB_LF = /[\u0000-\u0008\u000B-\u001F\u007F-\u009F]/g;
 // Bidi embeddings, overrides and isolates: they reorder how the surrounding
 // text displays, so a value can read differently from what it contains.
-const BIDI_CONTROLS = /[‪-‮⁦-⁩]/g;
+const BIDI_CONTROLS = /[\u202A-\u202E\u2066-\u2069]/g;
 // Zero-width space, non-joiner, joiner and BOM: invisible, so two values that
 // look identical can differ.
-const ZERO_WIDTH_CHARS = /[​-‍﻿]/g;
+const ZERO_WIDTH_CHARS = /[\u200B-\u200D\uFEFF]/g;
 
 function isContactCategory(value: unknown): value is ContactCategory {
   return CONTACT_CATEGORIES.some((category) => category === value);
