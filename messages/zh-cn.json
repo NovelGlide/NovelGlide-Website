@@ -18,7 +18,8 @@
     "bookmarkDescription": "你可以手动保存位置或让应用自动保存，这样你就可以随时跳回到上次离开的地方。"
   },
   "General": {
-    "privacyPolicy": "隐私政策"
+    "privacyPolicy": "隐私政策",
+    "termsOfUse": "使用条款"
   },
   "Blog": {
     "title": "博客",

@@ -8,13 +8,15 @@ import MarkdownViewer from "@/presentation/markdown_viewer/markdown_viewer";
 import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
-export default function PrivacyPolicyContent() {
+// A document the app shares with this site (privacy policy, terms of use),
+// fetched from the CDN in the page's locale. `folder` is its folder there.
+export default function ManualDocumentContent({folder}: {folder: string}) {
   const locale = useLocale();
   const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const url = LocaleUtils.getManualUrl('privacy-policy', locale);
+  const url = LocaleUtils.getManualUrl(folder, locale);
 
   useEffect(() => {
     setLoading(true);

@@ -18,6 +18,13 @@ export default function AppFooter() {
         >
           {t('privacyPolicy')}
         </NavLink>
+        <NavLink
+          href="/terms-of-use"
+          exact
+          aria-label={t('termsOfUse')}
+        >
+          {t('termsOfUse')}
+        </NavLink>
       </div>
       <p className="mt-4 text-sm text-zinc-600">
         &copy; 2025~2026 NovelGlide. All rights reserved.

@@ -18,7 +18,8 @@
     "bookmarkDescription": "手動でブックマークしたり、アプリに自動で保存させたりすることで、いつでも中断した場所に戻ることができます。"
   },
   "General": {
-    "privacyPolicy": "プライバシーポリシー"
+    "privacyPolicy": "プライバシーポリシー",
+    "termsOfUse": "利用規約"
   },
   "Blog": {
     "title": "ブログ",

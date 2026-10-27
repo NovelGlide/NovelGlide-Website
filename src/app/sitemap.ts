@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // chrome with no unique content, and noindex'd in its own metadata (see
   // src/app/[locale]/locale/page.tsx) for the same reason the sitemap
   // shouldn't be telling Google to crawl it either.
-  const staticPaths = ["", "/blog", "/privacy-policy", "/download"];
+  const staticPaths = ["", "/blog", "/privacy-policy", "/terms-of-use", "/download"];
   const entries: MetadataRoute.Sitemap = [];
 
   // Static pages exist in every locale.

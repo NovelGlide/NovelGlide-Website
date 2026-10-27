@@ -18,7 +18,8 @@
     "bookmarkDescription": "You can manually save your place with a bookmark or let the app automatically save it for you, so you can always jump back to where you left off."
   },
   "General": {
-    "privacyPolicy": "Privacy Policy"
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use"
   },
   "Blog": {
     "title": "Blog",
