@@ -15,15 +15,18 @@ behind the page can move without ever touching a store setting.
 ## Deploy
 
 **Push to `main` → Vercel auto-deploys to production.** CI is already
-wired on the Vercel side; there is no manual deploy step and no
-`vercel.json` in the repo (the project config lives in the Vercel
-dashboard). Don't add a deploy workflow — pushing `main` is the deploy.
+wired on the Vercel side; there is no manual deploy step. The project
+config lives in the Vercel dashboard; `vercel.json` exists only to declare
+the Vercel Cron schedule (§Contact Form). Don't add a deploy workflow —
+pushing `main` is the deploy.
 
 - `npm run dev` — local dev server (`next dev --turbopack`, port 3000).
 - `npm run build` — `next build --turbopack`. Sitemap + robots are **native
   routes** (`src/app/sitemap.ts` / `robots.ts`), not a post-build step —
   `next-sitemap` was removed.
 - `npm run lint` — eslint.
+- `npm test` — unit tests under `test/`, run by Node's built-in runner with
+  type stripping (no test framework; a `.ts` import needs its extension).
 
 ## Privacy Content Is Not In This Repo (the load-bearing quirk)
 
@@ -126,13 +129,50 @@ section is the rendering-side reference.
   them, but a proper rehost-to-our-origin is a TODO (marked in
   `blog_repository_data.ts`) — do it when the first image-heavy post ships.
 
+## Contact Form (Notion-backed, write-only)
+
+`/contact` replaces Facebook DM as the way to reach us. The browser form posts
+to `src/app/api/contact/route.ts`, which validates the fields with the same
+parser the form uses (`src/domain/contact_message.ts`), verifies the Cloudflare
+Turnstile token server-side, and creates one row in the Notion **User Feedback
+Log** (`Source = Contact form`, `Status = Open`; the message is the page
+body). Name, email and device are optional; without an email we cannot
+reply. The device choice maps to `Platform`; the form asks for no app version.
+
+- **Env (Vercel, Production + Preview).** `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
+  (public, inlined at build) · `TURNSTILE_SECRET_KEY` ·
+  `NOTION_FEEDBACK_TOKEN` · `NOTION_RETENTION_TOKEN` · `CRON_SECRET`. The four secrets are read only
+  through `src/config/contact_server_env.ts`. Every check fails **closed**: a
+  missing secret rejects the submission (or the cron call) rather than
+  skipping the check. Without the site key the page shows a "not set up"
+  notice and a disabled button.
+- **Notion access.** Two integrations, each with least privilege and each
+  **connected to the User Feedback Log database** (⋯ → Connections), separate
+  from the blog's read-only one: `NOTION_FEEDBACK_TOKEN` can only insert content
+  (the public submit route), `NOTION_RETENTION_TOKEN` can read and update
+  content (the cron-gated retention job only). The data
+  source id and property names live in
+  `src/data/contact_feedback_repository_data.ts`; renaming a property or a
+  select option in Notion breaks the write.
+- **One-year retention of sender details.** `vercel.json` schedules
+  `/api/cron/contact-retention` daily; Vercel calls it with
+  `Authorization: Bearer $CRON_SECRET`. It clears `Reply Email` and
+  `Contact Name` on contact-form rows submitted more than a year ago and keeps
+  the rest of the row.
+- **Logs never carry the sender's name, email or message** — only the failure kind.
+- **Local testing.** Cloudflare's test keys (site `1x00000000000000000000AA`,
+  secret `1x0000000000000000000000000000000AA`) always pass; without
+  `NOTION_FEEDBACK_TOKEN` the route answers 503 after verification. In
+  `next dev`, use the `/en/…` path for English: un-prefixed paths 404 there
+  (production serves them).
+
 ## Structure
 
 Loosely mirrors the app's clean-architecture layering. Locale is **path-based**
 (`src/app/[locale]/…`, next-intl `localePrefix: 'as-needed'`, so `en` is
 prefix-free) — there is no locale cookie.
 
-- `src/app/[locale]/` — App Router pages (home, `privacy-policy/`, `blog/`) +
+- `src/app/[locale]/` — App Router pages (home, `privacy-policy/`, `blog/`, `contact/`) +
   the root layout. `sitemap.ts` / `robots.ts` sit at `src/app/`.
 - `src/domain/` + `src/data/` — static-facade repositories:
   `http_repository` (R2 markdown fetch) and `blog_repository` (Notion).

@@ -19,7 +19,8 @@
   },
   "General": {
     "privacyPolicy": "Privacy Policy",
-    "termsOfUse": "Terms of Use"
+    "termsOfUse": "Terms of Use",
+    "contactUs": "Contact Us"
   },
   "Blog": {
     "title": "Blog",
@@ -34,6 +35,39 @@
     "title": "Get NovelGlide",
     "subtitle": "A free EPUB reader for iPhone, iPad, and Android.",
     "qrHint": "On a computer? Scan the code for your phone."
+  },
+  "Contact": {
+    "nameLabel": "Name",
+    "nameHint": "Leave blank to stay anonymous.",
+    "emailLabel": "Email",
+    "optional": "Optional",
+    "emailHint": "We can only reply if you leave your email, and we use it for nothing else.",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "Choose a category",
+    "category": {
+      "bug": "Bug report",
+      "feature": "Feature request",
+      "account": "Account & purchases",
+      "other": "Other"
+    },
+    "deviceTypeLabel": "Device",
+    "deviceTypePlaceholder": "Choose a device",
+    "device": {
+      "apple": "iPhone / iPad",
+      "android": "Android phone / tablet",
+      "other": "Other"
+    },
+    "messageLabel": "Message",
+    "messageLength": "{count, number} / {max, number}",
+    "submit": "Send",
+    "submitting": "Sending...",
+    "sentTitle": "Message sent",
+    "sentBody": "Thanks for your message.",
+    "errorInvalid": "Couldn't send your message. Some fields aren't filled in correctly. Check them and try again.",
+    "errorVerification": "Couldn't confirm you're not a bot. Complete the check again, then send.",
+    "errorNetwork": "Couldn't send your message. Check your connection and try again.",
+    "errorUnavailable": "Couldn't send your message. Try again later.",
+    "unconfigured": "The contact form isn't set up on this site, so messages can't be sent."
   },
   "Tags": {
     "announcement": "Announcement",

@@ -19,7 +19,8 @@
   },
   "General": {
     "privacyPolicy": "隱私權政策",
-    "termsOfUse": "使用條款"
+    "termsOfUse": "使用條款",
+    "contactUs": "聯絡我們"
   },
   "Blog": {
     "title": "部落格",
@@ -34,6 +35,39 @@
     "title": "取得 NovelGlide",
     "subtitle": "支援 iPhone、iPad 與 Android 的免費 EPUB 閱讀器。",
     "qrHint": "用電腦看嗎？掃描你手機對應的 QR code。"
+  },
+  "Contact": {
+    "nameLabel": "稱呼",
+    "nameHint": "留空即為匿名。",
+    "emailLabel": "電子郵件",
+    "optional": "選填",
+    "emailHint": "留下電子郵件，我們才能回覆你，也只會用於回覆。",
+    "categoryLabel": "類別",
+    "categoryPlaceholder": "請選擇類別",
+    "category": {
+      "bug": "問題回報",
+      "feature": "功能建議",
+      "account": "帳號與購買",
+      "other": "其他"
+    },
+    "deviceTypeLabel": "使用的裝置",
+    "deviceTypePlaceholder": "請選擇裝置",
+    "device": {
+      "apple": "iPhone / iPad",
+      "android": "Android 手機 / 平板",
+      "other": "其他"
+    },
+    "messageLabel": "內容",
+    "messageLength": "{count, number} / {max, number}",
+    "submit": "送出",
+    "submitting": "傳送中...",
+    "sentTitle": "已送出",
+    "sentBody": "感謝你的來信。",
+    "errorInvalid": "無法送出，部分欄位填寫有誤，請檢查後再試一次。",
+    "errorVerification": "無法完成驗證，請重新驗證後再送出。",
+    "errorNetwork": "無法送出。請檢查網路後再試一次。",
+    "errorUnavailable": "無法送出，請稍後再試。",
+    "unconfigured": "聯絡表單尚未設定，目前無法送出訊息。"
   },
   "Tags": {
     "announcement": "公告",

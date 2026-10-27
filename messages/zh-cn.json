@@ -19,7 +19,8 @@
   },
   "General": {
     "privacyPolicy": "隐私政策",
-    "termsOfUse": "使用条款"
+    "termsOfUse": "使用条款",
+    "contactUs": "联系我们"
   },
   "Blog": {
     "title": "博客",
@@ -34,6 +35,39 @@
     "title": "获取 NovelGlide",
     "subtitle": "支持 iPhone、iPad 与 Android 的免费 EPUB 阅读器。",
     "qrHint": "用电脑看吗？扫描你手机对应的二维码。"
+  },
+  "Contact": {
+    "nameLabel": "称呼",
+    "nameHint": "留空即为匿名。",
+    "emailLabel": "电子邮箱",
+    "optional": "选填",
+    "emailHint": "留下电子邮箱，我们才能回复你，也只会用于回复。",
+    "categoryLabel": "类别",
+    "categoryPlaceholder": "请选择类别",
+    "category": {
+      "bug": "问题反馈",
+      "feature": "功能建议",
+      "account": "账号与购买",
+      "other": "其他"
+    },
+    "deviceTypeLabel": "使用的设备",
+    "deviceTypePlaceholder": "请选择设备",
+    "device": {
+      "apple": "iPhone / iPad",
+      "android": "Android 手机 / 平板",
+      "other": "其他"
+    },
+    "messageLabel": "内容",
+    "messageLength": "{count, number} / {max, number}",
+    "submit": "发送",
+    "submitting": "发送中...",
+    "sentTitle": "已发送",
+    "sentBody": "感谢你的来信。",
+    "errorInvalid": "无法发送，部分字段填写有误，请检查后再试一次。",
+    "errorVerification": "无法完成验证，请重新验证后再发送。",
+    "errorNetwork": "无法发送。请检查网络后再试一次。",
+    "errorUnavailable": "无法发送，请稍后再试。",
+    "unconfigured": "联系表单尚未配置，目前无法发送消息。"
   },
   "Tags": {
     "announcement": "公告",

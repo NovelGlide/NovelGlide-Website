@@ -25,6 +25,13 @@ export default function AppFooter() {
         >
           {t('termsOfUse')}
         </NavLink>
+        <NavLink
+          href="/contact"
+          exact
+          aria-label={t('contactUs')}
+        >
+          {t('contactUs')}
+        </NavLink>
       </div>
       <p className="mt-4 text-sm text-zinc-600">
         &copy; 2025~2026 NovelGlide. All rights reserved.

@@ -19,7 +19,8 @@
   },
   "General": {
     "privacyPolicy": "プライバシーポリシー",
-    "termsOfUse": "利用規約"
+    "termsOfUse": "利用規約",
+    "contactUs": "お問い合わせ"
   },
   "Blog": {
     "title": "ブログ",
@@ -34,6 +35,39 @@
     "title": "NovelGlide を入手",
     "subtitle": "iPhone・iPad・Android 対応の無料 EPUB リーダー。",
     "qrHint": "パソコンで見ていますか？お使いのスマホ向けのコードをスキャンしてください。"
+  },
+  "Contact": {
+    "nameLabel": "お名前",
+    "nameHint": "空欄のままにすると匿名になります。",
+    "emailLabel": "メールアドレス",
+    "optional": "任意",
+    "emailHint": "メールアドレスをご入力いただいた場合のみ返信できます。返信以外には使用しません。",
+    "categoryLabel": "お問い合わせの種類",
+    "categoryPlaceholder": "選択してください",
+    "category": {
+      "bug": "不具合の報告",
+      "feature": "機能のご要望",
+      "account": "アカウント・購入",
+      "other": "その他"
+    },
+    "deviceTypeLabel": "ご利用の端末",
+    "deviceTypePlaceholder": "選択してください",
+    "device": {
+      "apple": "iPhone / iPad",
+      "android": "Android スマートフォン / タブレット",
+      "other": "その他"
+    },
+    "messageLabel": "お問い合わせ内容",
+    "messageLength": "{count, number} / {max, number}",
+    "submit": "送信",
+    "submitting": "送信中...",
+    "sentTitle": "送信しました",
+    "sentBody": "お問い合わせありがとうございます。",
+    "errorInvalid": "送信できませんでした。入力内容に誤りがあるため、確認してもう一度お試しください。",
+    "errorVerification": "認証できませんでした。もう一度認証してから送信してください。",
+    "errorNetwork": "送信できませんでした。接続を確認してもう一度お試しください。",
+    "errorUnavailable": "送信できませんでした。しばらくしてからもう一度お試しください。",
+    "unconfigured": "お問い合わせフォームが設定されていないため、現在は送信できません。"
   },
   "Tags": {
     "announcement": "お知らせ",
